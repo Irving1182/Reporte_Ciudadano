@@ -145,6 +145,15 @@
       <div class="seguimiento-resultado" id="seguimientoResultado" hidden></div>
     </section>
 
+    <!-- ===== REVISIÓN Y VALIDACIÓN (HT5 + HT6) ===== -->
+    <section class="card revision-card" aria-labelledby="revision-title">
+      <h2 id="revision-title">Revisar y validar reportes</h2>
+      <p class="hint">Revisa la evidencia de cada reporte y marca su estado.</p>
+      <ul class="revision-list" id="revisionList">
+        <li class="revision-list__empty" id="revisionListEmpty">Aún no hay reportes para revisar.</li>
+      </ul>
+    </section>
+
     <!-- ===== MIS REPORTES (persistencia local) ===== -->
     <section class="card list-card" aria-labelledby="list-title">
       <h2 id="list-title">Mis reportes en este dispositivo</h2>
@@ -160,6 +169,7 @@
   <script src="exif.js"></script>
   <script src="app.js"></script>
   <script src="seguimiento.js"></script>
+  <script src="revision.js"></script>
   <script src="pwa.js"></script>
 </body>
 </html>

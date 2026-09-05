@@ -84,4 +84,32 @@ async function buscarPorFolio(folio) {
   });
 }
 
-window.ReporteDB = { guardarReporte, obtenerReportes, buscarPorFolio };
+/**
+ * Actualiza el campo `estado` de un reporte existente. Usa una
+ * transacción readwrite: primero lee el reporte completo, modifica
+ * solo el estado, y lo vuelve a guardar (store.put) sin tocar el
+ * resto de los campos.
+ */
+async function actualizarEstado(id, nuevoEstado) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    const store = tx.objectStore(STORE_NAME);
+    const getRequest = store.get(id);
+
+    getRequest.onsuccess = () => {
+      const reporte = getRequest.result;
+      if (!reporte) {
+        reject(new Error("No existe un reporte con ese id."));
+        return;
+      }
+      reporte.estado = nuevoEstado;
+      const putRequest = store.put(reporte);
+      putRequest.onsuccess = () => resolve(reporte);
+      putRequest.onerror = () => reject(putRequest.error);
+    };
+    getRequest.onerror = () => reject(getRequest.error);
+  });
+}
+
+window.ReporteDB = { guardarReporte, obtenerReportes, buscarPorFolio, actualizarEstado };

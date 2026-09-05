@@ -7,7 +7,7 @@
 // porque nunca dependió de internet.
 // ============================================================
 
-const CACHE_NAME = "reporta-mexicali-v1";
+const CACHE_NAME = "reporta-mexicali-v2";
 
 const APP_SHELL = [
   "./",
@@ -17,6 +17,7 @@ const APP_SHELL = [
   "./db.js",
   "./exif.js",
   "./seguimiento.js",
+  "./revision.js",
   "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",

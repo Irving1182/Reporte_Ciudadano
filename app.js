@@ -191,6 +191,7 @@ form.addEventListener("submit", async (e) => {
     ticketFolio.classList.add("has-value");
 
     await renderReportList();
+    if (typeof renderRevisionList === "function") await renderRevisionList();
     form.reset();
     resetFormUI();
   } catch (err) {
