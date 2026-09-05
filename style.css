@@ -345,6 +345,18 @@ h1, h2 {
   color: var(--muted);
 }
 
+/* ===== Consulta de seguimiento (HT4) ===== */
+.seguimiento-resultado {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.seguimiento-resultado--success { background: #E4EFE9; color: var(--teal); }
+.seguimiento-resultado--error { background: #FBEAE6; color: var(--danger); }
+.seguimiento-resultado--warning { background: #FDF3E2; color: var(--amber-ink); }
+
 /* ===== Mis reportes ===== */
 .list-card h2 {
   font-size: 1.05rem;

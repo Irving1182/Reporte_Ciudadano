@@ -128,6 +128,23 @@
       </div>
     </section>
 
+    <!-- ===== CONSULTA DE SEGUIMIENTO (HT4) ===== -->
+    <section class="card seguimiento-card" aria-labelledby="seguimiento-title">
+      <h2 id="seguimiento-title">Consulta el estado de tu reporte</h2>
+      <p class="hint">Ingresa el folio que recibiste para ver su estado actual.</p>
+
+      <form id="buscarFolioForm">
+        <div class="field">
+          <label for="buscarFolioInput">Folio</label>
+          <input type="text" id="buscarFolioInput" class="text-input"
+                 placeholder="Ingresa tu folio" maxlength="6">
+        </div>
+        <button type="submit" class="btn btn--outline" id="btnBuscarFolio">Consultar</button>
+      </form>
+
+      <div class="seguimiento-resultado" id="seguimientoResultado" hidden></div>
+    </section>
+
     <!-- ===== MIS REPORTES (persistencia local) ===== -->
     <section class="card list-card" aria-labelledby="list-title">
       <h2 id="list-title">Mis reportes en este dispositivo</h2>
@@ -142,6 +159,7 @@
   <script src="db.js"></script>
   <script src="exif.js"></script>
   <script src="app.js"></script>
+  <script src="seguimiento.js"></script>
   <script src="pwa.js"></script>
 </body>
 </html>
