@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporta Mexicali — Nuevo reporte</title>
+<meta name="theme-color" content="#1C1F1E">
+<meta name="description" content="Documenta baches, luminarias y otras fallas urbanas sin dar tu nombre.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar__mark" aria-hidden="true">
+      <span class="dot"></span>
+    </div>
+    <div class="topbar__text">
+      <p class="eyebrow">Reporte ciudadano · anónimo</p>
+      <h1>Reporta Mexicali</h1>
+    </div>
+    <span class="conn-badge" id="connBadge">En línea</span>
+  </header>
+
+  <main class="layout">
+
+    <!-- ===== FORMULARIO ===== -->
+    <section class="card form-card" aria-labelledby="form-title">
+      <h2 id="form-title">Describe el problema</h2>
+      <p class="hint">No pedimos tu nombre ni datos personales. Solo lo necesario para documentar la falla.</p>
+
+      <form id="reportForm" novalidate>
+
+        <!-- Categoría -->
+        <fieldset class="field">
+          <legend>Tipo de problema</legend>
+          <div class="chip-group" id="categoriaGroup">
+            <button type="button" class="chip" data-value="bache">
+              <span class="chip__icon" aria-hidden="true">◐</span> Bache
+            </button>
+            <button type="button" class="chip" data-value="luminaria">
+              <span class="chip__icon" aria-hidden="true">◑</span> Luminaria
+            </button>
+            <button type="button" class="chip" data-value="basurero">
+              <span class="chip__icon" aria-hidden="true">◒</span> Basurero clandestino
+            </button>
+            <button type="button" class="chip" data-value="otro">
+              <span class="chip__icon" aria-hidden="true">◓</span> Otro
+            </button>
+          </div>
+          <input type="text" id="categoriaOtro" class="text-input categoria-otro" placeholder="Especifica el tipo de problema" hidden>
+        </fieldset>
+
+        <!-- Descripción -->
+        <div class="field">
+          <label for="descripcion">¿Qué está pasando?</label>
+          <textarea id="descripcion" class="text-input" rows="3" placeholder="Ej. Bache grande a media calle, lleva más de un mes sin repararse" maxlength="240"></textarea>
+          <span class="char-count"><span id="charCount">0</span>/240</span>
+        </div>
+
+        <!-- Evidencia fotográfica -->
+        <div class="field">
+          <label>Evidencia fotográfica</label>
+          <label for="fotoInput" class="photo-drop" id="photoDrop">
+            <div class="photo-drop__empty" id="photoEmpty">
+              <span class="photo-drop__icon" aria-hidden="true">📷</span>
+              <span>Toca para tomar o subir una foto</span>
+            </div>
+            <img id="photoPreview" class="photo-drop__preview" alt="Vista previa de la evidencia" hidden>
+          </label>
+          <input type="file" id="fotoInput" accept="image/*" capture="environment" hidden>
+        </div>
+
+        <!-- Ubicación -->
+        <div class="field">
+          <label>Ubicación</label>
+          <button type="button" class="btn btn--outline" id="ubicacionBtn">
+            <span aria-hidden="true">📍</span> Usar mi ubicación actual
+          </button>
+          <p class="location-status" id="locationStatus">Sin ubicación capturada</p>
+        </div>
+
+        <button type="submit" class="btn btn--primary" id="submitBtn">
+          Generar reporte
+        </button>
+        <p class="privacy-note">Tu reporte se guarda sin datos que te identifiquen. La foto se limpia de metadatos antes de enviarse.</p>
+      </form>
+    </section>
+
+    <!-- ===== TICKET / FOLIO ===== -->
+    <section class="card ticket-card" aria-labelledby="ticket-title" id="ticketCard">
+      <div class="ticket" id="ticket">
+        <div class="ticket__top">
+          <p class="eyebrow">Comprobante de reporte</p>
+          <h2 id="ticket-title">Folio pendiente</h2>
+        </div>
+
+        <dl class="ticket__rows">
+          <div class="ticket__row">
+            <dt>Tipo</dt>
+            <dd id="ticketCategoria">—</dd>
+          </div>
+          <div class="ticket__row">
+            <dt>Descripción</dt>
+            <dd id="ticketDescripcion">—</dd>
+          </div>
+          <div class="ticket__row">
+            <dt>Ubicación</dt>
+            <dd id="ticketUbicacion">—</dd>
+          </div>
+          <div class="ticket__row">
+            <dt>Evidencia</dt>
+            <dd id="ticketFoto">—</dd>
+          </div>
+        </dl>
+
+        <div class="ticket__perforation" aria-hidden="true"></div>
+
+        <div class="ticket__bottom">
+          <p class="ticket__folio-label">Folio</p>
+          <p class="ticket__folio" id="ticketFolio">— — — —</p>
+          <p class="ticket__note">Guarda este folio para dar seguimiento a tu reporte.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MIS REPORTES (persistencia local) ===== -->
+    <section class="card list-card" aria-labelledby="list-title">
+      <h2 id="list-title">Mis reportes en este dispositivo</h2>
+      <p class="hint">Guardados localmente. Nadie más puede verlos desde aquí.</p>
+      <ul class="report-list" id="reportList">
+        <li class="report-list__empty" id="reportListEmpty">Aún no has generado ningún reporte.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script src="db.js"></script>
+  <script src="exif.js"></script>
+  <script src="app.js"></script>
+  <script src="pwa.js"></script>
+</body>
+</html>
